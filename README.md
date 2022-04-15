@@ -148,6 +148,7 @@ Be prepared to demonstrate your understanding of this week's concepts by answeri
 
 1. The core features of Node.js and Express and why they are useful.
 1. Understand and explain the use of Middleware.
+It's the biggest feature of Express. Functions that extend 
 1. The basic principles of the REST architectural style.
 1. Understand and explain the use of Express Routers.
 1. Describe tooling used to manually test the correctness of an API.
