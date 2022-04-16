@@ -27,26 +27,28 @@ router.get('/:id', validateId, (req, res, next) => {
 })
 
 router.post('/', validateBody, async (req, res, next) => {
-    const {name, description} = req.body
+    const {name, description, completed} = req.body
 
     try{
-        const newProject = await Projects.insert({name: name, description: description, completed: true})
-        res.status(201).json(newProject)
+        // const newProject = await Projects.insert({name: name, description: description, completed: true})
+        // res.status(201).json(newProject)
+        const newProject = await Projects.insert({name: name, description: description, completed: true })
+        const {id} = newProject
+        const project = await Projects.get(id)
+        res.status(201).json(project)
     }catch(err){
         next(err)
     }
-    // const newProject = await Projects.insert({name: name, description: description, completed: true })
-    // const {id} = newProject
-    // const project = await Projects.get(id)
-    // res.status(201).json(project)
 })
 
 router.put('/:id', validateId, validateBody, async (req, res, next) => {
-    const {name, description} = req.body
+    const {name, description, completed} = req.body
      
     try{
-        const projectChange = await Projects.update(req.params.id, {name: name, description: description, completed: true})
-        res.status(200).json(projectChange)
+        const projectChange = await Projects.update(req.params.id, {name: name, description: description, completed: completed})
+        const {id} = projectChange
+        const project = await Projects.get(id)
+        res.status(200).json(project)
     }catch(err){
         next(err)
     }
