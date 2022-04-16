@@ -30,8 +30,6 @@ router.post('/', validateBody, async (req, res, next) => {
     const {name, description, completed} = req.body
 
     try{
-        // const newProject = await Projects.insert({name: name, description: description, completed: true})
-        // res.status(201).json(newProject)
         const newProject = await Projects.insert({name: name, description: description, completed: true })
         const {id} = newProject
         const project = await Projects.get(id)
