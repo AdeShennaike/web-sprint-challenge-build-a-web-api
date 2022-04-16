@@ -15,7 +15,7 @@ function validateId(req, res, next) {
 function validateBody(req, res, next) {
     const {project_id, description, notes, completed} = req.body
     
-    if(!notes || !description || completed === undefined){
+    if(!project_id || !notes || !description || completed === undefined){
         res.status(400).json({ 
             message: "body is missing any of the required"})
     }else{
