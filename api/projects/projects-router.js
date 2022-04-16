@@ -55,12 +55,24 @@ router.put('/:id', validateId, validateBody, async (req, res, next) => {
 
 })
 
-router.delete('/:id', (req, res, next) => {
-
+router.delete('/:id', validateId, (req, res, next) => {
+    Projects.remove(req.params.id)
+        .then(project => {
+            res.status(200).json(project)
+        })
+        .catch(err => {
+            next(err)
+        })
 })
 
-router.get('/:id/actions', (req, res, next) => {
-
+router.get('/:id/actions', validateId, async (req, res, next) => {
+    try{
+        const actions = await Projects.getProjectActions(req.params.id)
+        console.log(actions)
+        res.status(200).json(actions)
+    }catch(err){
+        next()
+    }
 })
 
 router.use((err, req, res, next) => {// eslint-disable-line
